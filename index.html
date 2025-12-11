@@ -6,274 +6,387 @@
 <title>DuoSpeak English</title>
 
 <style>
-/* Global Styles */
+
+/* GLOBAL STYLES */
 body {
+    font-family: 'Arial', sans-serif;
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: black;
-    color: white;
+    color: gold;
     overflow-x: hidden;
 }
 
-/* Header Banner */
-.header {
-    background-image: url('header-flag.png'); /* Your Brazil/USA flag */
-    background-size: cover;
-    background-position: center;
-    height: 260px;
+/* HEADER (USA + BRAZIL FLAG BACKGROUND) */
+header {
+    background: url('header-bg.jpg') center/cover no-repeat;
+    height: 55vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-shadow: 2px 2px 6px black;
-}
-
-.header h1 {
-    font-size: 48px;
-    font-weight: 700;
-    color: gold;
-}
-
-/* Sections */
-section {
-    padding: 40px 20px;
-    max-width: 900px;
-    margin: auto;
-}
-
-/* Elegant Titles */
-h2 {
-    font-size: 32px;
     text-align: center;
-    margin-bottom: 20px;
-    color: gold;
-}
-
-/* Plans Section */
-.plan-box {
-    background: #111;
-    border-radius: 12px;
     padding: 20px;
-    margin: 15px 0;
-    border: 1px solid gold;
-    transition: 0.3s;
+    position: relative;
 }
 
-.plan-box:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 15px gold;
+header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
 }
 
-.plan-title {
-    font-size: 26px;
+header * {
+    position: relative;
+    z-index: 2;
+}
+
+header img {
+    width: 180px;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 10px gold);
+}
+
+header h1 {
     color: gold;
-    font-weight: 700;
+    font-size: 2.6rem;
+    text-shadow: 0 0 15px rgba(255,215,0,0.7);
 }
 
-.plan-price {
-    font-size: 22px;
-    margin-top: 5px;
-}
-
-.plan-details {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-top: 10px;
-}
-
-/* Button */
-.button {
-    display: block;
-    text-align: center;
-    margin: 30px auto;
-    padding: 14px 24px;
+/* CTA BUTTON */
+.cta-button {
+    display: inline-block;
     background: gold;
     color: black;
+    padding: 15px 28px;
+    margin-top: 15px;
     text-decoration: none;
-    font-size: 22px;
     border-radius: 10px;
     font-weight: bold;
-    width: 300px;
+    font-size: 1.1rem;
+    box-shadow: 0 0 15px rgba(255,215,0,0.65);
     transition: 0.3s;
 }
 
-.button:hover {
-    transform: scale(1.05);
-    background: rgb(255, 230, 0);
+.cta-button:hover {
+    background: white;
+    color: black;
 }
 
-/* Teacher Section */
-.teacher-container {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    background: #111;
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid gold;
-    flex-wrap: wrap;
+/* MAIN CONTENT WRAPPER */
+main {
+    padding: 30px;
 }
 
-.teacher-container img {
-    width: 190px;
-    height: 190px;
-    border-radius: 12px;
-    object-fit: cover;
-    border: 2px solid gold;
-}
-
-/* Testimonial Slider */
-.testimonial-slider {
-    position: relative;
-    width: 100%;
+/* ABOUT THE CLASSES SECTION */
+.about-classes {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 60px 30px;
+    margin: 60px auto;
     max-width: 900px;
-    margin: auto;
-    overflow: hidden;
-}
-
-.testimonial {
-    display: none;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.15);
     text-align: center;
-    padding: 20px;
-    animation: fade 1s ease-in-out;
 }
 
-.testimonial img {
+.about-classes h2 {
+    color: gold;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.about-classes p {
+    color: gold;
+    font-size: 1.25rem;
+    line-height: 1.85;
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+/* MEET THE TEACHER SECTION */
+.teacher-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 40px;
+    border-radius: 15px;
+    background: rgba(20,20,20,0.9);
+    box-shadow: 0 0 25px rgba(255,215,0,0.1);
+    text-align: left;
+}
+
+.teacher-section img {
+    width: 220px;
+    border-radius: 12px;
+    border: 3px solid gold;
+}
+
+.teacher-section h2 {
+    font-size: 2.2rem;
+    color: gold;
+}
+
+.teacher-section p {
+    font-size: 1.2rem;
+    line-height: 1.85;
+}
+
+/* PRICING SECTION */
+.pricing-section {
+    max-width: 1000px;
+    margin: 80px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.pricing-section h2 {
+    font-size: 2.3rem;
+    color: gold;
+    margin-bottom: 30px;
+}
+
+.plan-box {
+    background: rgba(255, 215, 0, 0.08);
+    border: 1px solid gold;
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 750px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255,215,0,0.1);
+}
+
+.plan-box h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.plan-box p {
+    font-size: 1.2rem;
+}
+
+/* TESTIMONIAL SLIDER */
+.testimonial-slider {
+    text-align: center;
+    margin: 80px auto;
+    max-width: 850px;
+    padding: 20px;
+    animation: fadeInUp 1.6s ease;
+}
+
+.testimonials-title {
+    font-size: 2rem;
+    color: gold;
+    margin-bottom: 40px;
+    text-shadow: 0 0 12px rgba(255,215,0,0.3);
+}
+
+.slider-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 330px;
+}
+
+.slide {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
     width: 110px;
     height: 110px;
     border-radius: 50%;
+    background: white;
+    padding: 5px;
     margin-bottom: 15px;
-    border: 3px solid gold;
-    object-fit: cover;
+    box-shadow: 0 0 15px rgba(255,215,0,0.4);
 }
 
-/* Animations */
-@keyframes fade {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.slide h3 {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
 }
+
+.slide p {
+    color: gold;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.slider-dots {
+    margin-top: 20px;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    background: rgba(255,215,0,0.3);
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dot.active {
+    background: gold;
+    box-shadow: 0 0 10px gold;
+}
+
+/* Smooth Fade-In animation */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 </style>
-
 </head>
+
 <body>
 
-<!-- Header -->
-<div class="header">
+<header>
+    <img src="logo.png" alt="DuoSpeak English Logo">
     <h1>DuoSpeak English</h1>
-</div>
+    <a href="https://wa.me/5512997852150" class="cta-button">
+        📞 Book Your FREE 30-Minute Session Today!
+    </a>
+</header>
 
-<!-- Class Description -->
-<section>
-    <h2>What Are These Classes?</h2>
-    <p style="font-size: 20px; line-height: 1.6;">
-        DuoSpeak English offers personalized English conversation classes created specifically for Brazilian Portuguese speakers.
-        These sessions focus on real-life speaking, pronunciation, vocabulary expansion, fluency development, and building confidence
-        in natural communication.  
+<main>
+
+<!-- ABOUT THE CLASSES -->
+<section class="about-classes fade-in">
+    <h2>About Our Classes</h2>
+    <p>
+        At DuoSpeak English, our conversation classes are designed to completely transform how you feel when 
+        speaking English. Instead of freezing, overthinking, or doubting yourself, you’ll learn to express your 
+        ideas clearly, naturally, and confidently.
         <br><br>
-        These classes will NOT give you a certificate — they give you something far more valuable:
-        the ability to communicate confidently in English and open doors for your life, your career, and your future.  
-        <br><br>
-        With consistent practice, you will pave your path toward greater opportunities and prosperity through strong,
-        comfortable English communication.
+        These classes will not end with a certificate — they give you something far more valuable: 
+        <strong>true conversational fluency.</strong> You’ll gain the ability to speak comfortably in any situation 
+        and the confidence to pursue new opportunities in your personal and professional life.
     </p>
 </section>
 
-<!-- Meet the Teacher -->
-<section>
-    <h2>Meet the Teacher</h2>
-
-    <div class="teacher-container">
-
-        <!-- Teacher Photo -->
-        <img src="teacher-photo.jpg" alt="Instructor Photo">
-
-        <!-- Description -->
-        <p style="font-size: 20px; line-height: 1.6;">
-            Hello! My name is <strong>Instructor Adam Moorhead Furtado de Siqueira</strong>, founder of
-            <strong>DuoSpeak English</strong>.  
-            I am a TEFL-Certified English Teacher originally from the United States and currently living in Brazil.
-            I have a passion for helping Brazilian learners achieve true fluency through natural conversation,
-            confidence-building techniques, and real-world language practice.  
+<!-- MEET THE TEACHER -->
+<section class="teacher-section fade-in">
+    <img src="teacher-real.png" alt="Instructor Adam Siqueira">
+    <div>
+        <h2>Meet the Instructor</h2>
+        <p>
+            Instructor Adam Moorhead Furtado de Siqueira is a native English speaker from the United States who now 
+            proudly calls Brazil home. With a deep passion for helping Brazilian students speak confidently, he created 
+            DuoSpeak English to bring high-quality conversation training at an accessible price.
             <br><br>
-            My mission is to offer high-quality, accessible English conversation training at a fair price — helping you
-            unlock new opportunities and thrive in your future.
+            Adam is a <strong>TEFL-Certified English Teacher</strong> with professional methodology and a natural, 
+            real-world teaching style that helps students achieve real fluency with confidence and clarity.
         </p>
     </div>
 </section>
 
-<!-- Pricing Plans -->
-<section>
-    <h2>Choose Your Plan</h2>
+<!-- PRICING SECTION -->
+<section class="pricing-section fade-in">
+    <h2>Our Plans</h2>
 
     <div class="plan-box">
-        <div class="plan-title">🟢 Basic Plan</div>
-        <div class="plan-price">R$150 / month</div>
-        <div class="plan-details">4 classes per month • 1 class per week</div>
+        <h3>🟢 Basic Plan</h3>
+        <p>4 classes/month • 1 class per week • R$150</p>
     </div>
 
     <div class="plan-box">
-        <div class="plan-title">🟣 Standard Plan</div>
-        <div class="plan-price">R$250 / month</div>
-        <div class="plan-details">8 classes per month • 2 classes per week</div>
+        <h3>🟣 Standard Plan</h3>
+        <p>8 classes/month • 2 classes per week • R$250</p>
     </div>
 
     <div class="plan-box">
-        <div class="plan-title">💎 Premium Plan</div>
-        <div class="plan-price">R$700 / month</div>
-        <div class="plan-details">12–20 classes per month • 3–5 classes per week • Intensive fluency plan</div>
-    </div>
-
-    <a class="button" href="https://wa.me/5512997852150" target="_blank">
-        Book your first FREE 30-minute session today!
-    </a>
-</section>
-
-<!-- Testimonials -->
-<section>
-    <h2>Student Testimonials</h2>
-
-    <div class="testimonial-slider">
-
-        <!-- Testimonial 1 -->
-        <div class="testimonial" style="display:block;">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile 1">
-            <p style="font-size: 18px;">“These classes changed the way I speak English. I finally feel confident!”<br><strong>— Ana Silva</strong></p>
-        </div>
-
-        <!-- Testimonial 2 -->
-        <div class="testimonial">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile 2">
-            <p style="font-size: 18px;">“Instructor Siqueira helped me improve faster than any course I tried.”<br><strong>— João Pereira</strong></p>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div class="testimonial">
-            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Profile 3">
-            <p style="font-size: 18px;">“Very natural, very practical. I love the classes!”<br><strong>— Maria Souza</strong></p>
-        </div>
-
+        <h3>💎 Premium Plan</h3>
+        <p>12–20 classes/month • 3–5 classes/week • Intensive Fluency Training • R$700</p>
     </div>
 </section>
 
+<!-- TESTIMONIAL SLIDER -->
+<section class="testimonial-slider">
+    <h2 class="testimonials-title">What Our Students Say</h2>
+
+    <div class="slider-wrapper">
+        
+        <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e">
+            <h3>Ana Ribeiro</h3>
+            <p>“The classes are natural and fun. My confidence improved so fast! Adam explains everything in a way that feels simple.”</p>
+        </div>
+
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e">
+            <h3>Lucas Martins</h3>
+            <p>“For the first time, I can speak English at work without fear. DuoSpeak changed my fluency completely!”</p>
+        </div>
+
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb">
+            <h3>Maria Fernanda</h3>
+            <p>“The Premium Plan transformed my vocabulary and pronunciation. Truly worth every cent.”</p>
+        </div>
+
+    </div>
+
+    <div class="slider-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+</section>
+
+</main>
+
+<!-- TESTIMONIAL JAVASCRIPT -->
 <script>
-// Rotating Testimonial Slider
-let index = 0;
-const slides = document.getElementsByClassName("testimonial");
+let currentIndex = 0;
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
 
-function rotateTestimonials() {
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    index++;
-    if (index > slides.length) { index = 1; }
-    slides[index - 1].style.display = "block";
-    setTimeout(rotateTestimonials, 4000);
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+    });
+    dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+    });
 }
 
-rotateTestimonials();
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+}
+
+let slideInterval = setInterval(nextSlide, 5000);
+
+dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+        currentIndex = i;
+        showSlide(currentIndex);
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 5000);
+    });
+});
 </script>
 
 </body>
 </html>
+
 
 
 
