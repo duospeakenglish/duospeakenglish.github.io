@@ -106,13 +106,23 @@ main {
 
 /* MEET THE TEACHER SECTION */
 .teacher-section {
-    text-align: center;
-    max-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    max-width: 1000px;
     margin: 60px auto;
     padding: 40px;
     border-radius: 15px;
     background: rgba(20,20,20,0.9);
     box-shadow: 0 0 25px rgba(255,215,0,0.1);
+    text-align: left;
+}
+
+.teacher-section img {
+    width: 220px;
+    border-radius: 12px;
+    border: 3px solid gold;
 }
 
 .teacher-section h2 {
@@ -263,30 +273,28 @@ main {
     <p>
         At DuoSpeak English, our conversation classes are designed to completely transform how you feel when 
         speaking English. Instead of freezing, overthinking, or doubting yourself, you’ll learn to express your 
-        ideas clearly, naturally, and confidently. Every session focuses on real-life communication, pronunciation 
-        training, practical vocabulary, and personalized correction that removes the most common mistakes made by 
-        Brazilian Portuguese speakers.
+        ideas clearly, naturally, and confidently.
         <br><br>
         These classes will not end with a certificate — they give you something far more valuable: 
         <strong>true conversational fluency.</strong> You’ll gain the ability to speak comfortably in any situation 
         and the confidence to pursue new opportunities in your personal and professional life.
-        <br><br>
-        Mastering English opens doors. It creates possibilities. It elevates your future. This is your chance to 
-        invest in yourself, strengthen your voice, and pave your path toward prosperity, growth, and opportunity.
     </p>
 </section>
 
 <!-- MEET THE TEACHER -->
 <section class="teacher-section fade-in">
-    <h2>Meet the Teacher</h2>
-    <p>
-        Professor Adam Moorhead Furtado de Siqueira is a native English speaker from the United States who now 
-        proudly calls Brazil home. With a deep passion for helping Brazilian students speak confidently, he created 
-        DuoSpeak English to bring high-quality conversation training at an accessible price.
-        <br><br>
-        As a certified TEFL instructor, Professor Siqueira combines professional methodology with natural, 
-        real-world communication to help students achieve true fluency with confidence and clarity.
-    </p>
+    <img src="teacher.png" alt="Instructor Adam Siqueira">
+    <div>
+        <h2>Meet the Instructor</h2>
+        <p>
+            Instructor Adam Moorhead Furtado de Siqueira is a native English speaker from the United States who now 
+            proudly calls Brazil home. With a deep passion for helping Brazilian students speak confidently, he created 
+            DuoSpeak English to bring high-quality conversation training at an accessible price.
+            <br><br>
+            Adam is a <strong>TEFL-Certified English Teacher</strong> with professional methodology and a natural, 
+            real-world teaching style that helps students achieve real fluency with confidence and clarity.
+        </p>
+    </div>
 </section>
 
 <!-- PRICING SECTION -->
@@ -315,19 +323,19 @@ main {
 
     <div class="slider-wrapper">
         <div class="slide active">
-            <img src="https://randomuser.me/api/portraits/women/27.jpg">
+            <img src="https://api.dicebear.com/8.x/adventurer/svg?seed=Ava">
             <h3>Ana Ribeiro</h3>
-            <p>“The classes are natural and fun. My confidence improved so fast! Teacher Adam explains everything in a way that feels simple.”</p>
+            <p>“The classes are natural and fun. My confidence improved so fast! Adam explains everything in a way that feels simple.”</p>
         </div>
 
         <div class="slide">
-            <img src="https://randomuser.me/api/portraits/men/52.jpg">
+            <img src="https://api.dicebear.com/8.x/adventurer/svg?seed=Lucas">
             <h3>Lucas Martins</h3>
             <p>“For the first time, I can speak English at work without fear. DuoSpeak changed my fluency completely!”</p>
         </div>
 
         <div class="slide">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg">
+            <img src="https://api.dicebear.com/8.x/adventurer/svg?seed=Maria">
             <h3>Maria Fernanda</h3>
             <p>“The Premium Plan transformed my vocabulary and pronunciation. Truly worth every cent.”</p>
         </div>
@@ -376,6 +384,7 @@ dots.forEach((dot, i) => {
 
 </body>
 </html>
+
 
 
 
