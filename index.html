@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DuoSpeak English</title>
 
+<!-- Open Graph / meta (quick wins) -->
+<meta name="description" content="DuoSpeak English — Conversation sessions for Brazilian learners (intermediate-advanced). Book your FREE 30-min trial.">
+<meta property="og:title" content="DuoSpeak English — Conversation Lessons">
+<meta property="og:description" content="Native instructor, TEFL-certified. Tailored conversation practice for Brazilians.">
+<meta property="og:image" content="https://amoorhead75.github.io/duospeakenglish/logo.png">
+<meta property="og:url" content="https://amoorhead75.github.io/duospeakenglish/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.png" />
+
 <style>
 
 /* GLOBAL STYLES */
@@ -168,7 +178,7 @@ main {
     font-size: 1.2rem;
 }
 
-/* PIX PAYMENT SECTION */
+/* PIX PAYMENT SECTION (no QR code) */
 .pix-section {
     background: rgba(0,0,0,0.85);
     margin: 30px auto 60px;
@@ -198,23 +208,15 @@ main {
     flex-wrap: wrap;
 }
 
-.pix-qr {
-    width: 240px;
-    border-radius: 10px;
-    box-shadow: 0 0 18px rgba(255,215,0,0.25);
-    background: white;
-    padding: 8px;
-}
-
 .pix-instructions {
-    max-width: 420px;
+    max-width: 520px;
     color: gold;
     text-align: left;
     font-size: 1.05rem;
     line-height: 1.6;
 }
 
-/* Plan buttons next to QR */
+/* Plan copy buttons */
 .pix-plans {
     margin-top: 18px;
     display: flex;
@@ -236,13 +238,6 @@ main {
 }
 
 .pix-plan-btn:hover { transform: translateY(-4px); }
-
-/* small helper text */
-.pix-small {
-    color: gold;
-    font-size: 0.95rem;
-    margin-top: 12px;
-}
 
 /* TESTIMONIAL SLIDER */
 .testimonial-slider {
@@ -342,7 +337,7 @@ main {
 <header>
     <img src="logo.png" alt="DuoSpeak English Logo">
     <h1>DuoSpeak English</h1>
-    <a href="https://wa.me/5512997852150" class="cta-button">
+    <a href="https://wa.me/5512997852150" class="cta-button" target="_blank" rel="noopener">
         📞 Book Your FREE 30-Minute Session Today!
     </a>
 </header>
@@ -399,39 +394,35 @@ main {
     </div>
 </section>
 
-<!-- PIX PAYMENT SECTION (placed under Pricing) -->
+<!-- PIX PAYMENT SECTION (buttons copy PIX Copia-e-Cola) -->
 <section class="pix-section fade-in" aria-label="PIX Payment">
     <h2>Pay With PIX</h2>
     <img src="pix-logo.png" alt="PIX Logo" class="pix-logo">
 
     <p class="pix-small" style="text-align:center; margin-bottom:18px;">
-        Scan the QR code with your banking app and enter the amount for the plan you selected. After payment, please send the receipt on WhatsApp so we can confirm your class.
+        Choose your plan below. Click the button to copy the PIX payment code. Open your bank app and paste/enter the code to pay. After paying, send the receipt via WhatsApp to confirm your spot.
     </p>
 
-    <div class="pix-grid">
-        <img src="pix.png" alt="PIX QR Code" class="pix-qr">
-
-        <div class="pix-instructions">
-            <p style="margin-top:0;"><strong style="color:gold;">How to pay:</strong></p>
+    <div class="pix-grid" role="region" aria-label="PIX payment instructions and plan buttons">
+        <div class="pix-instructions" aria-hidden="false">
+            <p style="margin-top:0;"><strong style="color:gold;">How to pay with PIX (copy & paste):</strong></p>
             <ol style="color:gold; line-height:1.8;">
-                <li>Open your bank app and select PIX → Scan QR Code.</li>
-                <li>Scan the QR code on the left.</li>
-                <li>Enter the amount corresponding to the plan (buttons below will copy the amount for you).</li>
-                <li>Confirm the payment and send the receipt to WhatsApp: <a href="https://wa.me/5512997852150" style="color:gold; text-decoration:underline;">+55 12 99785-2150</a>.</li>
+                <li>Tap the button for the plan you want to buy — the full PIX payment code will be copied to your clipboard.</li>
+                <li>Open your bank app, choose PIX → Colar código (or Pix copia e cola) and paste the code.</li>
+                <li>Confirm the details (amount and receiver), complete the payment, then send a screenshot/receipt to WhatsApp: <a href="https://wa.me/5512997852150" style="color:gold; text-decoration:underline;">+55 12 99785-2150</a>.</li>
             </ol>
 
-            <div style="margin-top:14px;" class="pix-plans">
-                <button class="pix-plan-btn" onclick="selectPlan('Basic', 150)">🟢 Basic — R$150</button>
-                <button class="pix-plan-btn" onclick="selectPlan('Standard', 250)">🟣 Standard — R$250</button>
-                <button class="pix-plan-btn" onclick="selectPlan('Premium', 700)">💎 Premium — R$700</button>
+            <div style="margin-top:16px;" class="pix-plans" role="group" aria-label="PIX plan buttons">
+                <button class="pix-plan-btn" onclick="copyPixCode('basic')">🟢 Basic — R$150</button>
+                <button class="pix-plan-btn" onclick="copyPixCode('standard')">🟣 Standard — R$250</button>
+                <button class="pix-plan-btn" onclick="copyPixCode('premium')">💎 Premium — R$700</button>
             </div>
 
             <p class="pix-small" style="margin-top:14px;">
-                Tip: After you click a plan button we will copy the amount to your clipboard and show short instructions — then scan the QR and paste/type the amount in your bank app.
+                Tip: If your bank shows the recipient name before confirming, you should see: <strong>Adam Moorhead Furtado de Siqueira</strong> (Nubank).
             </p>
         </div>
     </div>
-
 </section>
 
 <!-- TESTIMONIAL SLIDER -->
@@ -461,15 +452,15 @@ main {
     </div>
 
     <div class="slider-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+        <span class="dot active" role="button" tabindex="0" aria-label="Slide 1"></span>
+        <span class="dot" role="button" tabindex="0" aria-label="Slide 2"></span>
+        <span class="dot" role="button" tabindex="0" aria-label="Slide 3"></span>
     </div>
 </section>
 
 </main>
 
-<!-- TESTIMONIAL JAVASCRIPT -->
+<!-- SCRIPTS -->
 <script>
 /* Testimonial slider */
 let currentIndex = 0;
@@ -501,21 +492,34 @@ dots.forEach((dot, i) => {
     });
 });
 
-/* PIX plan selection: copies the amount and shows instructions */
-function selectPlan(name, amount) {
-    const amountText = amount.toString().replace('.',','); // Brazilian style if desired
-    // Copy the numeric amount to clipboard (no currency symbol)
-    navigator.clipboard.writeText(amount.toString()).then(() => {
-        alert(name + " selected.\nAmount R$" + amount + " copied to clipboard.\n\nNow scan the QR code and paste/type R$" + amount + " in your bank app, then send the receipt to WhatsApp.");
+/* PIX Copia-e-Cola codes (pre-generated) */
+const PIX_CODES = {
+    basic: "00020126580014BR.GOV.BCB.PIX01367f368ab7-f85a-4865-9f8c-bf9abcf473ba5204000053039865406150.005802BR5919Adam Moorhead Furtado de Siqueira60019Sao Jose dos Campos62180507Basic6304D117",
+    standard: "00020126580014BR.GOV.BCB.PIX01367f368ab7-f85a-4865-9f8c-bf9abcf473ba5204000053039865406250.005802BR5919Adam Moorhead Furtado de Siqueira60019Sao Jose dos Campos6218050AStandard6304C992",
+    premium: "00020126580014BR.GOV.BCB.PIX01367f368ab7-f85a-4865-9f8c-bf9abcf473ba5204000053039865406700.005802BR5919Adam Moorhead Furtado de Siqueira60019Sao Jose dos Campos62180507Premium6304BC1F"
+};
+
+function copyPixCode(planKey) {
+    const code = PIX_CODES[planKey];
+    if (!code) {
+        alert("Erro: código PIX não encontrado.");
+        return;
+    }
+    navigator.clipboard.writeText(code).then(() => {
+        alert("Código PIX copiado! Abra seu app bancário, escolha PIX → Colar código e finalize o pagamento. Depois envie o comprovante para WhatsApp.");
     }).catch(() => {
-        // Fallback: show instructions if clipboard not allowed
-        alert(name + " selected.\nPlease scan the QR code and enter the amount R$" + amount + " in your bank app, then send the receipt to WhatsApp.");
+        // fallback: show code in prompt so user can copy manually
+        const userCopy = prompt("Seu navegador não permitiu cópia automática. Por favor copie manualmente o código abaixo:", code);
+        if (userCopy) {
+            alert("Obrigado — agora cole o código no seu app bancário e conclua o PIX.");
+        }
     });
 }
 </script>
 
 </body>
 </html>
+
 
 
 
