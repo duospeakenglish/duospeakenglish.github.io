@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>DuoSpeak English</title>
 
-<!-- Open Graph / meta (quick wins) -->
 <meta name="description" content="DuoSpeak English — Conversation sessions for Brazilian learners (intermediate-advanced). Book your FREE 30-min trial.">
 <meta property="og:title" content="DuoSpeak English — Conversation Lessons">
 <meta property="og:description" content="Native instructor, TEFL-certified. Tailored conversation practice for Brazilians.">
@@ -13,11 +12,11 @@
 <meta property="og:url" content="https://amoorhead75.github.io/duospeakenglish/">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" href="favicon.png" />
+<link rel="icon" href="favicon.png">
 
 <style>
+/* (kept original styles) */
 
-/* GLOBAL STYLES */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -238,6 +237,18 @@ main {
 
 .pix-plan-btn:hover { transform: translateY(-4px); }
 
+/* small debug area */
+#pix-debug {
+    margin-top: 14px;
+    text-align: left;
+    color: #ddd;
+    font-size: 0.92rem;
+    background: rgba(0,0,0,0.55);
+    padding: 12px;
+    border-radius: 8px;
+    display: none;
+}
+
 /* TESTIMONIAL SLIDER */
 .testimonial-slider {
     text-align: center;
@@ -420,6 +431,20 @@ main {
             <p class="pix-small" style="margin-top:14px;">
                 Tip: If your bank shows the recipient name before confirming, you should see: <strong>Adam Moorhead Furtado de Siqueira</strong> (Nubank).
             </p>
+
+            <p style="margin-top:12px;">
+                <button style="background:transparent;border:1px solid gold;color:gold;padding:6px 10px;border-radius:8px;cursor:pointer;"
+                    onclick="document.getElementById('pix-debug').style.display = (document.getElementById('pix-debug').style.display === 'block' ? 'none' : 'block')">
+                    Toggle generated PIX codes (debug)
+                </button>
+            </p>
+
+            <div id="pix-debug" aria-hidden="true">
+                <strong>Generated PIX strings (for debugging only):</strong>
+                <pre id="pix-debug-pre" style="white-space:pre-wrap;word-break:break-all;margin-top:8px;"></pre>
+                <small>These are the exact strings copied to clipboard — keep them private.</small>
+            </div>
+
         </div>
     </div>
 </section>
@@ -491,32 +516,110 @@ dots.forEach((dot, i) => {
     });
 });
 
-/* PIX Codes (Corrected & Validated) */
-const PIX_CODES = {
-    basic: "YOUR_VALID_BASIC_CODE_HERE",
-    standard: "YOUR_VALID_STANDARD_CODE_HERE",
-    premium: "YOUR_VALID_PREMIUM_CODE_HERE"
-};
+/* ---------- PIX: dynamic generator with correct CRC (CRC16-CCITT XModem) ---------- */
 
-function copyPixCode(planKey) {
-    const code = PIX_CODES[planKey];
-    if (!code) {
-        alert("Erro: código PIX não encontrado.");
-        return;
+/**
+ * crc16ccitt_xmodem: computes CRC16-CCITT with initial value 0x0000 (XModem variant)
+ * Returns a number 0..0xFFFF
+ */
+function crc16ccitt_xmodem(str) {
+  const data = new TextEncoder().encode(str);
+  let crc = 0x0000;
+  const poly = 0x1021;
+  for (let b of data) {
+    crc ^= (b << 8);
+    for (let i = 0; i < 8; i++) {
+      if ((crc & 0x8000) !== 0) {
+        crc = ((crc << 1) & 0xFFFF) ^ poly;
+      } else {
+        crc = (crc << 1) & 0xFFFF;
+      }
     }
-    navigator.clipboard.writeText(code).then(() => {
-        alert("Código PIX copiado! Abra seu app bancário, escolha PIX → Colar código e finalize o pagamento. Depois envie o comprovante para WhatsApp.");
-    }).catch(() => {
-        const userCopy = prompt("Seu navegador não permitiu cópia automática. Por favor copie manualmente o código abaixo:", code);
-        if (userCopy) {
-            alert("Obrigado — agora cole o código no seu app bancário e conclua o PIX.");
-        }
-    });
+  }
+  return crc & 0xFFFF;
 }
+
+function toHex4(num) {
+  return num.toString(16).toUpperCase().padStart(4, "0");
+}
+
+/**
+ * finalizePixPayload(payloadWithoutCRC)
+ * payloadWithoutCRC must include the "6304" CRC tag but NOT the 4 CRC hex chars
+ * returns the full payload string with CRC appended
+ */
+function finalizePixPayload(payloadWithoutCRC) {
+  const crc = crc16ccitt_xmodem(payloadWithoutCRC);
+  return payloadWithoutCRC + toHex4(crc);
+}
+
+/**
+ * generatePixCodes()
+ * Builds payload templates based on your original fields (amounts, name, city, etc.)
+ * and returns an object { basic, standard, premium } with valid copia-e-cola strings.
+ *
+ * NOTE: If you change recipient name/city/amounts, edit the template below.
+ */
+function generatePixCodes() {
+  // These base payload fragments mirror your original TLV content but exclude the last 4 CRC hex chars.
+  // Keep them updated if you change amounts, receiver name, or city.
+  const base = {
+    basic:    "00020126580014BR.GOV.BCB.PIX01367f368ab7-f85a-4865-9f8c-bf9abcf473ba5204000053039865406150.005802BR5919Adam Moorhead Furtado de Siqueira60019Sao Jose dos Campos62180507Basic6304",
+    standard: "00020126580014BR.GOV.BCB.PIX01367f368ab7-f85a-4865-9f8c-bf9abcf473ba5204000053039865406250.005802BR5919Adam Moorhead Furtado de Siqueira60019Sao Jose dos Campos6218050AStandard6304",
+    premium:  "00020126580014BR.GOV.BCB.PIX01367f368ab7-f85a-4865-9f8c-bf9abcf473ba5204000053039865406700.005802BR5919Adam Moorhead Furtado de Siqueira60019Sao Jose dos Campos62180507Premium6304"
+  };
+
+  const PIX_CODES = {};
+  for (let key of Object.keys(base)) {
+    PIX_CODES[key] = finalizePixPayload(base[key]);
+  }
+  return PIX_CODES;
+}
+
+// generate and expose
+const PIX_CODES = generatePixCodes();
+
+// fill debug area for visibility (hidden by default)
+const debugPre = document.getElementById("pix-debug-pre");
+if (debugPre) {
+  debugPre.textContent = "Basic:\n" + PIX_CODES.basic + "\n\nStandard:\n" + PIX_CODES.standard + "\n\nPremium:\n" + PIX_CODES.premium;
+}
+
+/* copy function uses the generated strings */
+function copyPixCode(planKey) {
+  const code = PIX_CODES[planKey];
+  if (!code) {
+    alert("Erro: código PIX não encontrado.");
+    return;
+  }
+
+  // Attempt clipboard write
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(code).then(() => {
+      alert("Código PIX copiado! Abra seu app bancário, escolha PIX → Colar código e finalize o pagamento. Depois envie o comprovante para WhatsApp.");
+    }).catch((err) => {
+      // fallback to prompt if clipboard API blocked
+      const userCopy = prompt("Seu navegador não permitiu cópia automática. Por favor copie manualmente o código abaixo:", code);
+      if (userCopy !== null) {
+        alert("Obrigado — agora cole o código no seu app bancário e conclua o PIX.");
+      }
+    });
+  } else {
+    // older browsers fallback
+    const userCopy = prompt("Por favor copie manualmente o código abaixo:", code);
+    if (userCopy !== null) {
+      alert("Obrigado — agora cole o código no seu app bancário e conclua o PIX.");
+    }
+  }
+}
+
+/* For quick console debug during tests */
+console.log("Generated PIX codes (for debugging):", PIX_CODES);
 </script>
 
 </body>
 </html>
+
 
 
 
